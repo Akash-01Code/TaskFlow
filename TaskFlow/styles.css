@@ -1,0 +1,365 @@
+
+:root {
+    --primary: #3a82ff;
+    --primary-light: #edf4ff;
+    --dark: #1a1a1a;
+    --gray-dark: #555;
+    --gray: #888;
+    --gray-light: #ddd;
+    --light: #f8f9fa;
+    --success: #28c76f;
+    --danger: #ea5455;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f5f7ff;
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+header {
+    background: white;
+    padding: 24px 28px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    color: var(--gray);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.task-form {
+    display: flex;
+    position: relative;
+}
+
+.task-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--light);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--dark);
+    transition: var(--transition);
+}
+
+.task-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(58, 130, 255, 0.15);
+}
+
+.task-input::placeholder {
+    color: var(--gray);
+}
+
+.add-btn {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;
+    padding: 0 18px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.add-btn:hover {
+    background: #2d6dd9;
+}
+
+.filters {
+    display: flex;
+    padding: 14px 28px;
+    border-bottom: 1px solid var(--gray-light);
+    gap: 8px;
+}
+
+.filter-btn {
+    padding: 6px 12px;
+    border: none;
+    background: transparent;
+    color: var(--gray-dark);
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn.active {
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.filter-btn:hover:not(.active) {
+    background: var(--light);
+}
+
+.tasks-container {
+    padding: 8px 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--gray-light);
+    transition: var(--transition);
+    animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task:last-child {
+    border-bottom: none;
+}
+
+.task:hover {
+    background: var(--light);
+}
+
+.checkbox {
+    min-width: 22px;
+    height: 22px;
+    border: 2px solid var(--gray);
+    border-radius: 6px;
+    margin-right: 16px;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+}
+
+.checkbox.checked {
+    background: var(--success);
+    border-color: var(--success);
+}
+
+.checkbox.checked::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 0.75rem;
+}
+
+.task-text {
+    flex: 1;
+    color: var(--dark);
+    font-size: 1rem;
+    word-break: break-word;
+    transition: var(--transition);
+}
+
+.task.completed .task-text {
+    color: var(--gray);
+    text-decoration: line-through;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.task-btn {
+    border: none;
+    background: transparent;
+    color: var(--gray);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 4px;
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateX(10px);
+}
+
+.task:hover .task-btn {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.edit-btn:hover {
+    color: var(--primary);
+}
+
+.delete-btn:hover {
+    color: var(--danger);
+}
+
+footer {
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--gray-light);
+}
+
+.clear-btn {
+    border: none;
+    background: transparent;
+    color: var(--danger);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.clear-btn:hover {
+    text-decoration: underline;
+}
+
+.empty-state {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--gray);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    color: var(--gray-light);
+}
+
+.empty-text {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.empty-subtext {
+    font-size: 0.9rem;
+}
+
+/* Edit mode styles */
+.edit-form {
+    flex: 1;
+    display: flex;
+    margin-right: 8px;
+}
+
+.edit-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid var(--primary);
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.edit-input:focus {
+    outline: none;
+}
+
+.save-btn {
+    border: none;
+    background: var(--success);
+    color: white;
+    padding: 0 12px;
+    border-radius: 6px;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.save-btn:hover {
+    background: #20a35a;
+}
+
+.cancel-btn {
+    border: none;
+    background: var(--gray-light);
+    color: var(--gray-dark);
+    padding: 0 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cancel-btn:hover {
+    background: #c8c8c8;
+}
+
+@media (max-width: 480px) {
+    .container {
+        border-radius: 0;
+        max-width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tasks-container {
+        flex: 1;
+        max-height: none;
+    }
+
+    body {
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .task-input {
+        padding: 12px 14px;
+    }
+
+    .add-btn {
+        padding: 0 12px;
+    }
+}
